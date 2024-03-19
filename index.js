@@ -7,17 +7,15 @@ const PORT = 3000;
 //motor de plantilla
 app.set('view engine', 'hbs')
 app.engine('hbs', exphbs.engine({
-    defaultLayout:'main',
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials',
-    extname: 'hbs' 
-}))
+    extname: 'hbs'
+}));
 
+app.set('views', __dirname + '/views')
 //ruta estática
 
 app.use(express.static('assets'))
-app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css')) 
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist')) 
+app.use('/bootstrap', express.static('/node_modules/bootstrap/dist')) 
+// app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist')) 
 
 
 //vistas
@@ -25,14 +23,9 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
 app.get('/home', (req, res)=> {
     res.render('home',{
         title: 'Home',
-    })
-})
-app.get('/productos', (req, res)=> {
-    res.render('productos',{
-        title: 'Productos',
         products:[banana, cebollas, lechuga, papas, pimenton, tomate]
     })
-})
+});
 
 //ruta
 app.get('/', (req,res)=>{
@@ -42,3 +35,34 @@ app.get('/', (req,res)=>{
 app.listen(PORT,()=>{
     console.log(`Server running on Port http://localhost:${PORT}`)
 })
+
+
+// const expres = require('express');
+// const app = expres();
+// const PORT = 3000;
+
+
+// //motor de plantillas
+// app.set('view engine', 'hbs');
+// app.engine('hbs', exphbs.engine({
+//     extname: '.hbs',
+// }));
+// app.set ('views', __dirname + '/views');
+
+// //rutas estaticas
+// app.use(express.static('assets'));
+// app.use('/booststrap', express.static('/node_modules/bootstrap/dist'));
+// //rutas
+// app.get('/', (req, res) => res.render('home',{
+//     products:[
+//         'bananas',
+//         'cebolla',
+//         'pimenton',
+//         'papas',
+//         'lechuga',
+//         'tomate'
+//     ]
+// }));
+
+
+
